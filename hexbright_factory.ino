@@ -9,15 +9,17 @@
 #include <Wire.h>
 
 // Settings
-#define OVERTEMP                340
+#define OVERTEMP                340 //~1.1V = 60°C = 140°F
 // Pin assignments
-#define DPIN_RLED_SW            2
-#define DPIN_GLED               5
-#define DPIN_PWR                8
-#define DPIN_DRV_MODE           9
-#define DPIN_DRV_EN             10
-#define APIN_TEMP               0
-#define APIN_CHARGE             3
+#define DPIN_RLED_SW            2 //PD2, INT0, MLF PIN 28
+#define DPIN_ACC_INT            3 //PD3, INT1, MLF PIN 1
+#define DPIN_GLED               5 //PD5, OC0B, MLF PIN 7
+#define DPIN_PGOOD              7 //PD7, MLF PIN 9
+#define DPIN_PWR                8 //PB0, MLF PIN 10
+#define DPIN_DRV_MODE           9 //PB1, OC1A, MLF PIN 11
+#define DPIN_DRV_EN             10 //PB2, OC1B, MLF PIN 12
+#define APIN_TEMP               0 //PC0, ADC0, MLF PIN 19
+#define APIN_CHARGE             3 //PC3, ADC3, MLF PIN 22
 // Modes
 #define MODE_OFF                0
 #define MODE_LOW                1
