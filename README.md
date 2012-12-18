@@ -1,43 +1,51 @@
+Modified HexBright Code 
+=======================
+Features from the various demo examples and some additional functionality from
+users jaebird and bhimoff have been combined into a basic low-med-high-dazzle
+firmware and an accelerometer-driven adjustable brightness firmware.  I find
+these two cases to be the most useful. The sketches have been placed in folders
+for Arduino IDE compatibility. I plan to also add additional power-saving 
+features (sleep modes) beyond the timed power-off to help extend battery life. 
+I realize the sleep mode savings will be dwarfed by the LED current drain, but 
+every mAh counts.
+
+HexBright_Basic
+-----------------
+Based on the factory firmware with some modifications: button presses cycle 
+through off, low, medium, and high modes; hold down the button while off for 
+dazzle mode; hold down for one second in low or medium mode to turn off; auto
+power-off based on accelerometer non-motion.
+
+HexBright_Adjust
+-----------------
+Based on the hexbright4 firmware to adjust the brightness based on tilt
+orientation. I plan to have the set brightness stored (EEPROM) and recalled at
+next power-on.
+
 HexBright Demo Code 
 =======================
+The following have been unmodified code-wise.  I have re-named them and put
+them in folders like the modified ones.
 
-hexbright_factory
------------------
-This is the software that ships with the Hexbright Flex.  Button presses cycle
-through off, low, medium, and high modes.  Hold down the button while off for 
-blinky mode.
-
-hexbright4
----------------------
-Fancier than the factory program, but designed for everyday usability.  Button
-presses cycle through off, low and high modes.  Hold the light horizontally,
-hold the button down, and rotate about the long axis clockwise to increase
-brightness, and counter-clockwise to decrease brightness- the brightness sticks
-when you let go of the button.  While holding the button down, give the light a
-firm tap to change to blinky mode, and another to change to dazzle mode.
-
-hexbright_demo_morse
+HexBright_Demo_Morse
 --------------------
 Flashes out a message in morse code every time you press the button.  Nothing 
 else.  The message and speed are easy to change- you can see and change both 
 in the first lines of code.
 
-hexbright_demo_taps
+HexBright_Demo_Taps
 -------------------
 Hold the button down, and with your other hand firmly tap on the light.  Tap
 some more times, and let go of the button.  The exact sequence of taps will
 be recorded and then played back as flashes until you press the button again
 to turn off.
 
-hexbright_demo_momentary
+HexBright_Demo_Momentary
 ------------------------  
 Light turns on only while the button is being held down.  That's it.
 
-hexbright_demo_dazzle
----------------------
-Light runs in dazzle mode only as long as the button is being held down.
-
-hexbright_demo_fades
---------------------  
-Hold the button down, and light fades up and down.  Let go, and it holds the 
-current brightness.  Another press to turn off.
+Removed Demo Code 
+=======================
+I removed the dazzle and fade code as separate sketches since they didn't seem
+all that useful by themselves when the functionality can be added to the Basic
+and/or Adjust code.
