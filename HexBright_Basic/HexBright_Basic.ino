@@ -15,6 +15,11 @@
   https://github.com/bhimoff/samples/
   - Added 1.0 second button hold power-off based on code from 
   https://github.com/jaebird/samples
+  
+  18 December 2012
+  - Changed the way dazzle works and set flicker rate to match
+  the known frequencies for vertigo (about 10 to 20Hz):
+  http://en.wikipedia.org/wiki/Flicker_vertigo
 */
 
 #include <math.h>
@@ -59,6 +64,7 @@
 byte mode = 0;
 unsigned long btnTime = 0;
 boolean btnDown = false;
+boolean dazzle_on = true;
 
 void setup()
 {
@@ -106,6 +112,7 @@ void setup()
   mode = MODE_OFF;
 
   Serial.println("Powered up!");
+  randomSeed(analogRead(1));
 }
 
 void loop()
@@ -181,9 +188,10 @@ void loop()
   {
   case MODE_DAZZLE:
   case MODE_DAZZLE_PREVIEW:
-    if (time - lastDazzleTime > 10)
+    if (time - lastDazzleTime > random(50,100))
     {
-      digitalWrite(DPIN_DRV_EN, random(4)<1);
+      digitalWrite(DPIN_DRV_EN, dazzle_on);
+      dazzle_on = !dazzle_on;
       lastDazzleTime = time;
     }    
     break;
