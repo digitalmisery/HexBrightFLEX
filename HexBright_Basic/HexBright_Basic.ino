@@ -18,7 +18,7 @@
   
   18 December 2012
   - Changed the way dazzle works and set flicker rate to match
-  the known frequencies for vertigo (about 10 to 20Hz):
+  the known frequencies for vertigo (about 5 to 20Hz):
   http://en.wikipedia.org/wiki/Flicker_vertigo
 */
 
@@ -65,6 +65,7 @@ byte mode = 0;
 unsigned long btnTime = 0;
 boolean btnDown = false;
 boolean dazzle_on = true;
+long dazzle_period = 100;
 
 void setup()
 {
@@ -188,11 +189,12 @@ void loop()
   {
   case MODE_DAZZLE:
   case MODE_DAZZLE_PREVIEW:
-    if (time - lastDazzleTime > random(50,100))
+    if (time - lastDazzleTime > dazzle_period)
     {
       digitalWrite(DPIN_DRV_EN, dazzle_on);
       dazzle_on = !dazzle_on;
       lastDazzleTime = time;
+      dazzle_period = random(50,200);
     }    
     break;
   }
@@ -241,7 +243,7 @@ void loop()
   }
   
   //activity power down
-  if (time-max(lastAccTime,lastModeTime) > 1800000UL) { //30 minutes
+  if (time-max(lastAccTime,lastModeTime) > 600000UL) { //10 minutes
     newMode = MODE_OFF;
   }
 
