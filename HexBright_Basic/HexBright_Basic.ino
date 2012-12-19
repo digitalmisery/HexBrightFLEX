@@ -194,7 +194,7 @@ void loop()
       digitalWrite(DPIN_DRV_EN, dazzle_on);
       dazzle_on = !dazzle_on;
       lastDazzleTime = time;
-      dazzle_period = random(50,200);
+      dazzle_period = random(25,100);
     }    
     break;
   }
