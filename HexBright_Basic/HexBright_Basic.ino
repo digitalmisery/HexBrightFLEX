@@ -20,6 +20,11 @@
   - Changed the way dazzle works and set flicker rate to match
   the known frequencies for vertigo (about 5 to 20Hz):
   http://en.wikipedia.org/wiki/Flicker_vertigo
+
+  16 January 2013
+  - Changed dazzle to stay at one frequency for a set amount
+  of time (currently 2 seconds) before changing to a new 
+  frequency.  Reverted back to frequencies between 10 and 20Hz.
 */
 
 #include <math.h>
@@ -66,6 +71,7 @@ unsigned long btnTime = 0;
 boolean btnDown = false;
 boolean dazzle_on = true;
 long dazzle_period = 100;
+long dazzle_duration = 2000;
 
 void setup()
 {
@@ -118,7 +124,7 @@ void setup()
 
 void loop()
 {
-  static unsigned long lastDazzleTime, lastTempTime, lastModeTime, lastAccTime;
+  static unsigned long lastDazzleTime, lastTempTime, lastModeTime, lastAccTime, dazzleTime;
   static int ledState = LOW;
   
   unsigned long time = millis();
@@ -189,13 +195,18 @@ void loop()
   {
   case MODE_DAZZLE:
   case MODE_DAZZLE_PREVIEW:
+    if (time - dazzleTime > dazzle_duration)
+    {
+      dazzleTime = time;
+      dazzle_period = random(25,50);
+    }     
+      
     if (time - lastDazzleTime > dazzle_period)
     {
       digitalWrite(DPIN_DRV_EN, dazzle_on);
       dazzle_on = !dazzle_on;
       lastDazzleTime = time;
-      dazzle_period = random(25,100);
-    }    
+    }
     break;
   }
   
